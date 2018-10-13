@@ -47,8 +47,6 @@ namespace GPP_Application_HL
                 else
                     col.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             }
-
-
         }
         #region IReport
         void IReport.ExportExcel()

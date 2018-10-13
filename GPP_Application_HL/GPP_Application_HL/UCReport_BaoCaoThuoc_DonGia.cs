@@ -36,7 +36,6 @@ namespace GPP_Application_HL
             "TENTHUOC", "Tên thuốc", 100, "", true,
             "DONGIA", "Đơn giá ", 100, GridHelper.TextEdit_Mod, true, GridHelper.Numberic, 50, "N3"
             );
-          
         }
         #region IReport
         void IReport.ExportExcel()

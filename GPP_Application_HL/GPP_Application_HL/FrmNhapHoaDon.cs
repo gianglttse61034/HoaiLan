@@ -89,6 +89,10 @@ namespace GPP_Application_HL
 
         private void FrmNhapHoaDon_Load(object sender, EventArgs e)
         {
+           
+        }
+        private void FrmNhapHoaDon_Shown(object sender, EventArgs e)
+        {
             BackgroundWorker bw = new BackgroundWorker();
             bw.DoWork += delegate { soid_goc = Convert.ToInt32(dm.DanhMuc_TOPID("IDHDN", "HOADONNHAP").Rows[0]["MAXID"]); };
             bw.DoWork += delegate { soid_ct = Convert.ToInt32(dm.DanhMuc_TOPID("IdChiTietHoaDonNhap_Thuoc", "CTHDNHAP_THUOC").Rows[0]["MAXID"]); };
@@ -101,108 +105,108 @@ namespace GPP_Application_HL
             bw.DoWork += delegate { dt_DVT = dm.DanhMuc_DVT(); };
             bw.DoWork += delegate { m_DsResult = nk.ConnectData(tu_ngay, den_ngay); };
             bw.RunWorkerCompleted += delegate
-             {
-                 DataTable lydoNhap = new DataTable();
-                 lydoNhap.Columns.Add("IDLYDO", typeof(int));
-                 lydoNhap.Columns.Add("LYDO", typeof(string));
-                 lydoNhap.Rows.Add(new object[] { 5, "Nhập hàng" });
-                 lydoNhap.Rows.Add(new object[] { 6, "Nhập hàng tồn đầu" });
-                 lydoNhap.Rows.Add(new object[] { 3, "Trả hàng" });
-                 DataTable ThueVAT = new DataTable();
-                 ThueVAT.Columns.Add("VAT", typeof(decimal));
-                 ThueVAT.Columns.Add("TENVAT", typeof(string));
-                 ThueVAT.Rows.Add(new object[] { 5, "5%" });
-                 ThueVAT.Rows.Add(new object[] { 10, "10%" });
-                 ThueVAT.Rows.Add(new object[] { 15, "15%" });
-                 ThueVAT.Rows.Add(new object[] { 20, "20%" });
-                 ThueVAT.Rows.Add(new object[] { 25, "25%" });
-                 ThueVAT.Rows.Add(new object[] { 0, "0%" });
+            {
+                DataTable lydoNhap = new DataTable();
+                lydoNhap.Columns.Add("IDLYDO", typeof(int));
+                lydoNhap.Columns.Add("LYDO", typeof(string));
+                lydoNhap.Rows.Add(new object[] { 5, "Nhập hàng" });
+                lydoNhap.Rows.Add(new object[] { 6, "Nhập hàng tồn đầu" });
+                lydoNhap.Rows.Add(new object[] { 3, "Trả hàng" });
+                DataTable ThueVAT = new DataTable();
+                ThueVAT.Columns.Add("VAT", typeof(decimal));
+                ThueVAT.Columns.Add("TENVAT", typeof(string));
+                ThueVAT.Rows.Add(new object[] { 5, "5%" });
+                ThueVAT.Rows.Add(new object[] { 10, "10%" });
+                ThueVAT.Rows.Add(new object[] { 15, "15%" });
+                ThueVAT.Rows.Add(new object[] { 20, "20%" });
+                ThueVAT.Rows.Add(new object[] { 25, "25%" });
+                ThueVAT.Rows.Add(new object[] { 0, "0%" });
 
 
 
-                 #region Format lookup
-                 lkpThueVAT.Properties.Columns.AddRange(new LookUpColumnInfo[] {
+                #region Format lookup
+                lkpThueVAT.Properties.Columns.AddRange(new LookUpColumnInfo[] {
                         new LookUpColumnInfo("TENVAT", 250, "Tên")
                     });
-                 lkpThueVAT.Properties.DisplayMember = "TENVAT";
-                 lkpThueVAT.Properties.ValueMember = "VAT";
-                 lkpThueVAT.Properties.NullText = "";
-                 lkpThueVAT.Properties.ShowHeader = false;
-                 lkpThueVAT.Properties.DataSource = ThueVAT;
+                lkpThueVAT.Properties.DisplayMember = "TENVAT";
+                lkpThueVAT.Properties.ValueMember = "VAT";
+                lkpThueVAT.Properties.NullText = "";
+                lkpThueVAT.Properties.ShowHeader = false;
+                lkpThueVAT.Properties.DataSource = ThueVAT;
 
-                 lkpNuocSanXuat.Properties.Columns.AddRange(new LookUpColumnInfo[] {
+                lkpNuocSanXuat.Properties.Columns.AddRange(new LookUpColumnInfo[] {
                         new LookUpColumnInfo("TENNSX", 250, "Tên")
                     });
-                 lkpNuocSanXuat.Properties.DisplayMember = "TENNSX";
-                 lkpNuocSanXuat.Properties.ValueMember = "IDNSX";
-                 lkpNuocSanXuat.Properties.NullText = "";
-                 lkpNuocSanXuat.Properties.ShowHeader = false;
-                 lkpNuocSanXuat.Properties.DataSource = dt_NSX;
+                lkpNuocSanXuat.Properties.DisplayMember = "TENNSX";
+                lkpNuocSanXuat.Properties.ValueMember = "IDNSX";
+                lkpNuocSanXuat.Properties.NullText = "";
+                lkpNuocSanXuat.Properties.ShowHeader = false;
+                lkpNuocSanXuat.Properties.DataSource = dt_NSX;
 
-                 lkpNhaCungCap.Properties.Columns.AddRange(new LookUpColumnInfo[] {
+                lkpNhaCungCap.Properties.Columns.AddRange(new LookUpColumnInfo[] {
                         new LookUpColumnInfo("TENNCC", 250, "Tên")
                     });
-                 lkpNhaCungCap.Properties.DisplayMember = "TENNCC";
-                 lkpNhaCungCap.Properties.ValueMember = "IDNCC";
-                 lkpNhaCungCap.Properties.NullText = "";
-                 lkpNhaCungCap.Properties.ShowHeader = false;
-                 lkpNhaCungCap.Properties.DataSource = dt_NCC;
+                lkpNhaCungCap.Properties.DisplayMember = "TENNCC";
+                lkpNhaCungCap.Properties.ValueMember = "IDNCC";
+                lkpNhaCungCap.Properties.NullText = "";
+                lkpNhaCungCap.Properties.ShowHeader = false;
+                lkpNhaCungCap.Properties.DataSource = dt_NCC;
 
-                 lkpLoaiBietDuoc.Properties.Columns.AddRange(new LookUpColumnInfo[] {
+                lkpLoaiBietDuoc.Properties.Columns.AddRange(new LookUpColumnInfo[] {
                         new LookUpColumnInfo("TENLOAI", 250, "Tên")
                     });
-                 lkpLoaiBietDuoc.Properties.DisplayMember = "TENLOAI";
-                 lkpLoaiBietDuoc.Properties.ValueMember = "IDLOAITHUOC";
-                 lkpLoaiBietDuoc.Properties.NullText = "";
-                 lkpLoaiBietDuoc.Properties.ShowHeader = false;
-                 lkpLoaiBietDuoc.Properties.DataSource = dt_LoaiThuoc;
+                lkpLoaiBietDuoc.Properties.DisplayMember = "TENLOAI";
+                lkpLoaiBietDuoc.Properties.ValueMember = "IDLOAITHUOC";
+                lkpLoaiBietDuoc.Properties.NullText = "";
+                lkpLoaiBietDuoc.Properties.ShowHeader = false;
+                lkpLoaiBietDuoc.Properties.DataSource = dt_LoaiThuoc;
 
-                 lkpLoaiSP.Properties.Columns.AddRange(new LookUpColumnInfo[] {
+                lkpLoaiSP.Properties.Columns.AddRange(new LookUpColumnInfo[] {
                         new LookUpColumnInfo("TENSP", 250, "Tên")
                     });
-                 lkpLoaiSP.Properties.DisplayMember = "TENSP";
-                 lkpLoaiSP.Properties.ValueMember = "IDSANPHAM";
-                 lkpLoaiSP.Properties.NullText = "";
-                 lkpLoaiSP.Properties.ShowHeader = false;
-                 lkpLoaiSP.Properties.DataSource = dt_loaiSP;
+                lkpLoaiSP.Properties.DisplayMember = "TENSP";
+                lkpLoaiSP.Properties.ValueMember = "IDSANPHAM";
+                lkpLoaiSP.Properties.NullText = "";
+                lkpLoaiSP.Properties.ShowHeader = false;
+                lkpLoaiSP.Properties.DataSource = dt_loaiSP;
 
-                 lkpLyDoNhap.Properties.Columns.AddRange(new LookUpColumnInfo[] {
+                lkpLyDoNhap.Properties.Columns.AddRange(new LookUpColumnInfo[] {
                         new LookUpColumnInfo("LYDO", 250, "Tên")
                     });
-                 lkpLyDoNhap.Properties.DisplayMember = "LYDO";
-                 lkpLyDoNhap.Properties.ValueMember = "IDLYDO";
-                 lkpLyDoNhap.Properties.NullText = "";
-                 lkpLyDoNhap.Properties.ShowHeader = false;
-                 lkpLyDoNhap.Properties.DataSource = lydoNhap;
+                lkpLyDoNhap.Properties.DisplayMember = "LYDO";
+                lkpLyDoNhap.Properties.ValueMember = "IDLYDO";
+                lkpLyDoNhap.Properties.NullText = "";
+                lkpLyDoNhap.Properties.ShowHeader = false;
+                lkpLyDoNhap.Properties.DataSource = lydoNhap;
 
-                 lkpDonViTinh.Properties.Columns.AddRange(new LookUpColumnInfo[] {
+                lkpDonViTinh.Properties.Columns.AddRange(new LookUpColumnInfo[] {
                         new LookUpColumnInfo("TENDVT", 250, "Tên")
                     });
-                 lkpDonViTinh.Properties.DisplayMember = "TENDVT";
-                 lkpDonViTinh.Properties.ValueMember = "IDDVT";
-                 lkpDonViTinh.Properties.NullText = "";
-                 lkpDonViTinh.Properties.ShowHeader = false;
-                 lkpDonViTinh.Properties.DataSource = dt_DVT;
+                lkpDonViTinh.Properties.DisplayMember = "TENDVT";
+                lkpDonViTinh.Properties.ValueMember = "IDDVT";
+                lkpDonViTinh.Properties.NullText = "";
+                lkpDonViTinh.Properties.ShowHeader = false;
+                lkpDonViTinh.Properties.DataSource = dt_DVT;
 
-                 lkpBietDuoc.Properties.Columns.AddRange(new LookUpColumnInfo[] {
+                lkpBietDuoc.Properties.Columns.AddRange(new LookUpColumnInfo[] {
                         new LookUpColumnInfo("TENTHUOC", 250, "Tên")
                     });
 
-                 lkpBietDuoc.Properties.DisplayMember = "TENTHUOC";
-                 lkpBietDuoc.Properties.ValueMember = "IDTHUOC";
-                 lkpBietDuoc.Properties.NullText = "";
-                 lkpBietDuoc.Properties.ShowHeader = false;
-                 lkpBietDuoc.Properties.DataSource = dt_Thuoc;
+                lkpBietDuoc.Properties.DisplayMember = "TENTHUOC";
+                lkpBietDuoc.Properties.ValueMember = "IDTHUOC";
+                lkpBietDuoc.Properties.NullText = "";
+                lkpBietDuoc.Properties.ShowHeader = false;
+                lkpBietDuoc.Properties.DataSource = dt_Thuoc;
 
-                 #endregion
-                 BindingData();
-                 LoadLayout();
-                 KhoaButton(false);
-                 SetProgressbar(false);
-                 btnHuyLuu.Enabled = btnLuuHD.Enabled = false;
-                 btnLuuHD.Enabled = false;
-                 gridView_CT.FocusedRowHandle = GridControl.AutoFilterRowHandle;
-             };
+                #endregion
+                BindingData();
+                LoadLayout();
+                KhoaButton(false);
+                SetProgressbar(false);
+                btnHuyLuu.Enabled = btnLuuHD.Enabled = false;
+                btnLuuHD.Enabled = false;
+                gridView_CT.FocusedRowHandle = GridControl.AutoFilterRowHandle;
+            };
             bw.RunWorkerAsync(); SetProgressbar(true);
             bw.Dispose();
         }
@@ -212,10 +216,12 @@ namespace GPP_Application_HL
             if (gridView_CT.RowCount < 0) return;
             tongtien = 0;
             DataTable dt = ((DataView)gridView_CT.DataSource).ToTable();
-            foreach (DataRow rw in dt.Rows)
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
+                DataRow rw = dt.Rows[i];
                 tongtien += Convert.ToDecimal(rw["DONGIAN_VAT_"] == null ? 0 : rw["DONGIAN_VAT_"]) * Convert.ToDecimal(rw["SOLUONGNHAP"] == null ? 0 : rw["SOLUONGNHAP"]);
             }
+
             txtTongTien.EditValue = tongtien;
         }
 
@@ -424,7 +430,6 @@ namespace GPP_Application_HL
             };
             bw.RunWorkerCompleted += delegate
             {
-
                 BindingData();
                 FindForm().Activate();
             };
@@ -436,7 +441,6 @@ namespace GPP_Application_HL
         {
             if (m_IsAddNew) return;
             if(gridView_CT.FocusedRowHandle == GridControl.AutoFilterRowHandle) return;
-            //(TongTienTheoDong);
             DataRow rw = gridView_CT.GetDataRow(gridView_CT.FocusedRowHandle);
             if (rw != null)
                 BindingData_CT(rw);
@@ -792,6 +796,23 @@ namespace GPP_Application_HL
                 else rw["FLAG"] = 0;
                 XoaDuLieu();
             }
+        }
+
+        private void gridView_CT_CustomRowFilter(object sender, DevExpress.XtraGrid.Views.Base.RowFilterEventArgs e)
+        {
+            e.Handled = true;
+            e.Visible = true;
+        }
+
+        private void FrmNhapHoaDon_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(dt_Thuoc!=null) dt_Thuoc.Dispose();
+            if (dt_NCC != null) dt_NCC.Dispose();
+            if (dt_loaiSP != null) dt_loaiSP.Dispose();
+            if (dt_LoaiThuoc != null) dt_LoaiThuoc.Dispose();
+            if (dt_NSX != null) dt_NSX.Dispose();
+            if (dt_LyDo != null) dt_LyDo.Dispose();
+            if (dt_DVT != null) dt_DVT.Dispose();
         }
 
         private void BindingData_CT(DataRow drw)
